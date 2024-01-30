@@ -1,0 +1,95 @@
+{
+    "data": {
+        "tenants": {
+            "test_tenant1": {
+                "description": "First tenant for the automation"
+            },
+            "test_tenant2": {
+                "description": "Second tenant for the automation"
+            }
+        },
+        "vrfs": {
+            "1": {
+                "tenant": "test_tenant1",
+                "name": "VRF001"
+            },
+            "2": {
+                "tenant": "test_tenant1",
+                "name": "VRF002"
+            },
+            "3": {
+                "tenant": "test_tenant2",
+                "name": "VRF001"
+            }
+        },
+        "bridge_domains": {
+            "1": {
+                "tenant": "test_tenant1",
+                "name": "BD001",
+                "vrf": "VRF001"
+            },
+            "2": {
+                "tenant": "test_tenant1",
+                "name": "BD002",
+                "vrf": "VRF001"
+            },
+            "3": {
+                "tenant": "test_tenant2",
+                "name": "BD001",
+                "vrf": "VRF001"
+            }
+        },
+        "subnets": {
+            "1": {
+                "bridge_domain_id": "1",
+                "ip": "10.1.1.1/24"
+            }
+        },
+        "contracts": {
+            "1": {
+                "tenant": "test_tenant1",
+                "name": "CONTRACT001"
+            },
+            "2": {
+                "tenant": "test_tenant2",
+                "name": "CONTRACT002"
+            }
+        },
+        "filters": {
+            "1": {
+                "tenant": "test_tenant1",
+                "name": "FILTER001",
+                "entries": [
+                    {
+                        "destination_port": "443",
+                        "source_port": "443",
+                        "ip_protocol": "ip",
+                        "l4_protocol": "tcp",
+                        "name": "Permit443BiDir"
+                    },
+                    {
+                        "destination_port": "80",
+                        "source_port": "80",
+                        "ip_protocol": "ip",
+                        "l4_protocol": "tcp",
+                        "name": "Permit80BiDir"
+                    }
+                ]
+            }
+        },
+        "app_profiles": {
+            "1": {
+                "tenant": "test_tenant1",
+                "name": "APP_PROFILE001"
+            }
+        },
+        "epgs": {
+            "1": {
+                "app_profile_id": "1",
+                "contract_id": "1",
+                "bridge_domain_id": "1",
+                "name": "EPG001"
+            }
+        }
+    }
+}
