@@ -41,6 +41,12 @@ variable "data" {
       bridge_domain_id = string
       name             = string
     }))
+    contract_subjects = map(object({
+        contract_id = string
+        name = string
+        apply_both_directions = string
+        filter_id = string
+    }))
   })
 }
 

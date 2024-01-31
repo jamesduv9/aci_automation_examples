@@ -117,7 +117,7 @@ def test_epgs_exist(aci_session, aci_data, instance_data):
         bridge_domain_name = aci_data.get("bridge_domains").get(epg_values.get("bridge_domain_id")).get("name")
         url = f'https://{instance_data["aci_ip"]}/api/mo/uni/tn-{tenant_name}.json'
         url += f'?rsp-subtree=full&rsp-subtree-include=no-scoped&rsp-subtree-class=fvAEPg'
-        url += f'&rsp-subtree-filter=eq(fvAEPg.name, "{epg_values.get("name")}")'
+        url += f'&rsp-subtree-filter=and(eq(fvAEPg.name, "{epg_values.get("name")}"))'
 
         current_epgs = aci_session.get(url).json()
         assert current_epgs.get("totalCount") == "1"

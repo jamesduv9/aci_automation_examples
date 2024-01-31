@@ -63,3 +63,22 @@ resource "aci_application_epg" "my-epgs" {
   name = "${each.value.name}"
   relation_fv_rs_bd = aci_bridge_domain.my-bridge_domains["${each.value.bridge_domain_id}"].id
 }
+
+//Looks like the aci_epg_to_contract requires the contract to have a subject with the associated provider_to_consumer or consumer to provider block
+
+resource "aci_contract_subject" "my-subjects" {
+  for_each = {for subject_key, subject_value in var.data.contract_subjects: subject_key => subject_value}
+  contract_dn = aci_contract.my-contracts["${each.value.contract_id}"].id
+  name = "${each.value.name}"
+  # apply_both_directions = "${each.value.apply_both_directions}"
+  relation_vz_rs_subj_filt_att = toset([aci_filter.my-filters["${each.value.filter_id}"].id])
+}
+//Bug in 0.7, not sure how to proceed.
+//unknown property value uni/tn-test_tenant1/ap-APP_PROFILE001/rscons-CONTRACT001, name dn, class fvRsCons [(Dn0)] Dn0=, 
+
+# resource "aci_epg_to_contract" "my-epg-contract-relation" {
+#   for_each = {for epg_key, epg_value in var.data.epgs: epg_key => epg_value}
+#   application_epg_dn = aci_application_profile.my-app-profiles["${each.value.app_profile_id}"].id
+#   contract_dn = aci_contract.my-contracts["${each.value.contract_id}"].id
+#   contract_type = "consumer"
+# }

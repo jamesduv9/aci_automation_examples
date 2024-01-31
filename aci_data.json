@@ -90,6 +90,14 @@
                 "bridge_domain_id": "1",
                 "name": "EPG001"
             }
+        },
+        "contract_subjects": {
+            "1": {
+                "contract_id": "1",
+                "name": "SUBJECT001",
+                "apply_both_directions": "you",
+                "filter_id": "1"
+            }
         }
     }
 }
